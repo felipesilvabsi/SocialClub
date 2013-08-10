@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <div class="row-fluid">
+        <div class="span2">
+            <h:outputLabel value="Selecione uma opção"/>
+        </div>
+        <div class="span1 offset9">
+            <label class="checkbox">
+                <input id="chkInativo" type="checkbox" name="inativo" value="Inativo">  Inativo</input>
+            </label>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span2">
+            <label class="checkbox">
+                <input id="pessoaFisica" type="checkbox" name="pessoaFisical" value="Pessoa Fisica">  Pessoa Fisica</input>
+            </label>
+        </div>
+        <div class="span2">
+            <label class="checkbox">
+                <input id="pessoaJuridica" type="checkbox" name="pessoaJuridica" value="Pessoa Juridica">  Pessoa Juridica</input>
+            </label>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <h:outputLabel for="campoNome" value="Nome: *" styleClass="control-label"/>
+        <div class="controls">
+            <h:inputText id="campoNome" value="" />
+        </div>
+    </div>
+
+    <div id="painelPessoaFisica" style="display: none;">
+        <div class="control-group">
+            <h:outputLabel for="campoCPF" value="CPF: *" styleClass="control-label"/>
+            <div class="controls">
+                <h:inputText id="campoCPF" value="" class="mask-cpf"/>
+            </div>
+        </div>
+    </div>
+
+    <div id="painelPessoaJuridica" style="display: none;">
+        <div class="control-group">
+            <h:outputLabel for="campoCNPJ" value="CNPJ: *" styleClass="control-label"/>
+            <div class="controls">
+                <h:inputText id="campoCNPJ" value="" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <h:outputLabel for="campoCRT" value="CRT: *" styleClass="control-label"/>
+            <div class="controls">
+                <h:inputText id="campoCRT" value="" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <h:outputLabel for="campoNomeFantasia" value="Nome Fantasia: *" styleClass="control-label"/>
+            <div class="controls">
+                <h:inputText id="campoNomeFantasia" value="" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <h:outputLabel for="campoInscEstadual" value="Inscrição Estadual: *" styleClass="control-label"/>
+            <div class="controls">
+                <h:inputText id="campoInscEstadual" value="" />
+            </div>
+        </div>
+    </div>
+
+</html>
+
