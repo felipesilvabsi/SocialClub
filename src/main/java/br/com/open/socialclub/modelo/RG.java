@@ -1,23 +1,24 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.open.socialclub.modelo;
 
 import java.util.Date;
 
-/**
- *
- * @author Felipe Silva
- */
 public class RG {
-    
-    String numero;
-    String orgao;
-    Date dataEmissao;
-    
-    Estado estado;   
-    
+
+    private String numero;
+    private String orgaoEmissor;
+    private Estado uf;
+    private Date dataEmissao;
+
+    public RG() {
+    }
+
+    public RG(String numero, String orgaoEmissor, Estado uf, Date dataEmissao) {
+        this.numero = numero;
+        this.orgaoEmissor = orgaoEmissor;
+        this.uf = uf;
+        this.dataEmissao = dataEmissao;
+    }
+
     public String getNumero() {
         return numero;
     }
@@ -26,12 +27,20 @@ public class RG {
         this.numero = numero;
     }
 
-    public String getOrgao() {
-        return orgao;
+    public String getOrgaoEmissor() {
+        return orgaoEmissor;
     }
 
-    public void setOrgao(String orgao) {
-        this.orgao = orgao;
+    public void setOrgaoEmissor(String orgaoEmissor) {
+        this.orgaoEmissor = orgaoEmissor;
+    }
+
+    public Estado getUf() {
+        return uf;
+    }
+
+    public void setUf(Estado uf) {
+        this.uf = uf;
     }
 
     public Date getDataEmissao() {
@@ -41,13 +50,4 @@ public class RG {
     public void setDataEmissao(Date dataEmissao) {
         this.dataEmissao = dataEmissao;
     }
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-        
 }

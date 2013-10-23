@@ -1,49 +1,77 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.open.socialclub.modelo;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- *
- * @author Felipe Silva
- */
 public class Socio {
-    
-    long codigo;
-    String nome;
-    String cadastradoPor;
-    Date dataCadastro;
-    String modificadoPor;
-    Date dataModificacao;
-    boolean inativo;
-    
-    PessoaFisica pessoaFisica;
-    PessoaJuridica pessoaJuridica;
-    List<Telefone> listaTelefones;
-    CategoriaSocio categoriaSocio;
-    TipoSocio tipoSocio;
-    Endereco endereco;
-    
+
+    private int codigo;
+    private String nome;
+    private Endereco endereco;
+    private DadosPessoaFisica dadosPessoaFisica;
+    private DadosPessoaJuridica dadosPessoaJuridica;
+    private CategoriaSocio categoriaSocio;
+    private TipoSocio tipoSocio;
+    private boolean inativo;
+    private Date dataCadastro;
+    private String cadastradoPor;
+    private Date dataModificado;
+    private String modificadoPor;
+
+    private ArrayList<Telefone> telefones;
 
     public Socio() {
-        pessoaFisica = new PessoaFisica();
-        pessoaJuridica = new PessoaJuridica();
-        listaTelefones = new ArrayList<Telefone>();
+        endereco = new Endereco();
+        dadosPessoaFisica = new DadosPessoaFisica();
+        dadosPessoaJuridica = new DadosPessoaJuridica();
         categoriaSocio = new CategoriaSocio();
         tipoSocio = new TipoSocio();
-        endereco = new Endereco();
+        telefones = new ArrayList<Telefone>();
     }
 
-    public long getCodigo() {
+    /**
+     *
+     * @param codigo
+     * @param tipo
+     * @param nome
+     * @param endereco
+     * @param dadosPessoaFisica
+     * @param dadosPessoaJuridica
+     * @param categoriaSocio
+     * @param tipoSocio
+     * @param inativo
+     * @param dataCadastro
+     * @param cadastradoPor
+     * @param dataModificado
+     * @param modificadoPor
+     * @param telefones
+     */
+    public Socio(int codigo, String nome, Endereco endereco, DadosPessoaFisica dadosPessoaFisica,
+            DadosPessoaJuridica dadosPessoaJuridica, CategoriaSocio categoriaSocio,
+            TipoSocio tipoSocio, boolean inativo, Date dataCadastro, String cadastradoPor,
+            Date dataModificado, String modificadoPor, ArrayList<Telefone> telefones) {
+        
+        this.codigo = codigo;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.dadosPessoaFisica = dadosPessoaFisica;
+        this.dadosPessoaJuridica = dadosPessoaJuridica;
+        this.categoriaSocio = categoriaSocio;
+        this.tipoSocio = tipoSocio;
+        this.inativo = inativo;
+        this.dataCadastro = dataCadastro;
+        this.cadastradoPor = cadastradoPor;
+        this.dataModificado = dataModificado;
+        this.modificadoPor = modificadoPor;
+        this.telefones = telefones;
+    }
+
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(long codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
@@ -55,68 +83,28 @@ public class Socio {
         this.nome = nome;
     }
 
-    public String getCadastradoPor() {
-        return cadastradoPor;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setCadastradoPor(String cadastradoPor) {
-        this.cadastradoPor = cadastradoPor;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
-    public Date getDataCadastro() {
-        return dataCadastro;
+    public DadosPessoaFisica getDadosPessoaFisica() {
+        return dadosPessoaFisica;
     }
 
-    public void setDataCadastro(Date dataCadastro) {
-        this.dataCadastro = dataCadastro;
+    public void setDadosPessoaFisica(DadosPessoaFisica dadosPessoaFisica) {
+        this.dadosPessoaFisica = dadosPessoaFisica;
     }
 
-    public String getModificadoPor() {
-        return modificadoPor;
+    public DadosPessoaJuridica getDadosPessoaJuridica() {
+        return dadosPessoaJuridica;
     }
 
-    public void setModificadoPor(String modificadoPor) {
-        this.modificadoPor = modificadoPor;
-    }
-
-    public Date getDataModificacao() {
-        return dataModificacao;
-    }
-
-    public void setDataModificacao(Date dataModificacao) {
-        this.dataModificacao = dataModificacao;
-    }
-
-    public boolean isInativo() {
-        return inativo;
-    }
-
-    public void setInativo(boolean inativo) {
-        this.inativo = inativo;
-    }
-
-    public PessoaFisica getPessoaFisica() {
-        return pessoaFisica;
-    }
-
-    public void setPessoaFisica(PessoaFisica pessoaFisica) {
-        this.pessoaFisica = pessoaFisica;
-    }
-
-    public PessoaJuridica getPessoaJuridica() {
-        return pessoaJuridica;
-    }
-
-    public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
-        this.pessoaJuridica = pessoaJuridica;
-    }
-
-    public List<Telefone> getListaTelefones() {
-        return listaTelefones;
-    }
-
-    public void setListaTelefones(List<Telefone> listaTelefones) {
-        this.listaTelefones = listaTelefones;
+    public void setDadosPessoaJuridica(DadosPessoaJuridica dadosPessoaJuridica) {
+        this.dadosPessoaJuridica = dadosPessoaJuridica;
     }
 
     public CategoriaSocio getCategoriaSocio() {
@@ -135,12 +123,51 @@ public class Socio {
         this.tipoSocio = tipoSocio;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
+    public boolean isInativo() {
+        return inativo;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public void setInativo(boolean inativo) {
+        this.inativo = inativo;
     }
-    
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public String getCadastradoPor() {
+        return cadastradoPor;
+    }
+
+    public void setCadastradoPor(String cadastradoPor) {
+        this.cadastradoPor = cadastradoPor;
+    }
+
+    public Date getDataModificado() {
+        return dataModificado;
+    }
+
+    public void setDataModificado(Date dataModificado) {
+        this.dataModificado = dataModificado;
+    }
+
+    public String getModificadoPor() {
+        return modificadoPor;
+    }
+
+    public void setModificadoPor(String modificadoPor) {
+        this.modificadoPor = modificadoPor;
+    }
+
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(ArrayList<Telefone> telefones) {
+        this.telefones = telefones;
+    }
 }

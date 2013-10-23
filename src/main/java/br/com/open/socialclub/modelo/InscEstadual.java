@@ -1,18 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.open.socialclub.modelo;
 
-/**
- *
- * @author Felipe Silva
- */
-public class InscricaoEstadual {
-    
-    String documento;
-    
-    Estado estado;
+public class InscEstadual {
+
+    private String documento;
+    private Estado estado;
+
+    public InscEstadual() {
+        estado = new Estado();
+    }
+
+    public InscEstadual(String documento, Estado estado) {
+        this.documento = documento;
+        this.estado = estado;
+    }
 
     public String getDocumento() {
         return documento;
@@ -29,5 +29,4 @@ public class InscricaoEstadual {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
-    
 }

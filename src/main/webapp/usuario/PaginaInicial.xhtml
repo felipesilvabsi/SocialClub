@@ -6,19 +6,22 @@
 
     <ui:decorate template="/template/TemaPadrao.xhtml">
         <ui:define name="title">
-            Cadastro
+            <h1>Bem vindo</h1>
         </ui:define>
         <ui:define name="javascripts">
-            <script src="#{request.contextPath}/template/js/jquery.mask.js"/>
-            <script src="#{request.contextPath}/template/js/fuction.form.socio.js"/>
+
         </ui:define>
         <ui:define name="stylesheets">
 
         </ui:define>
         <ui:define name="body">
-            <h:form id="formCadastroSocio" class="form-actions">
-                <ui:include src="/usuario/socio/FormularioPrincipal.xhtml"/>
-            </h:form>
+            <!-- Jumbotron -->
+            <div class="jumbotron">
+                <p class="lead">Descrição do projeto</p>
+            </div>
+
+            <hr/>
+            
         </ui:define>
     </ui:decorate>
 </html>

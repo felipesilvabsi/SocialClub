@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:decorate template="/template/TemaPadrao.xhtml">
+        <ui:define name="title">
+            Cadastro
+        </ui:define>
+        <ui:define name="javascripts">
+
+        </ui:define>
+        <ui:define name="stylesheets">
+
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="mensagens" showDetail="true" autoUpdate="true" closable="true" globalOnly="true"/>
+            <h:form id="formCadastroCategoriaSocio" class="form-actions">
+                <ui:include src="/administrador/categoriaSocio/FormularioPrincipal.xhtml"/>
+
+                <p:commandLink id="botaoInserir" value="Confirmar" update=":formCadastroCategoriaSocio, :mensagens" styleClass="btn btn-primary"
+                               actionListener="#{categoriaSocioMB.salvarCategoriaSocio()}" type="submit"/>
+            </h:form>
+
+        </ui:define>
+    </ui:decorate>
+</html>
+

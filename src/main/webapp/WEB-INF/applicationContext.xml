@@ -9,27 +9,29 @@
     
     <http auto-config="false" access-denied-page="/acesso/AcessoNegado.xhtml">
         <intercept-url pattern="/usuario/**" access="ROLE_USUARIO, ROLE_ADMINISTRADOR, ROLE_SUPERADMIN" />
+        <intercept-url pattern="/administrador/**" access="ROLE_ADMINISTRADOR, ROLE_SUPERADMIN" />
+        <intercept-url pattern="/superadmin/**" access="ROLE_SUPERADMIN" />
         <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 
         <form-login login-page="/acesso/Login.xhtml" 
                     always-use-default-target="false"
-                    default-target-url="/acesso/PaginaInicial.xhtml"
+                    default-target-url="/usuario/PaginaInicial.xhtml"
                     authentication-failure-url="/acesso/Login.xhtml?error=1"/>
                     
-        <logout logout-success-url="/"/>
+        <logout logout-success-url="/acesso/Login.xhtml"/>
     </http>
 
     <authentication-manager>
         <authentication-provider>
             <password-encoder hash="md5"/>
             <jdbc-user-service data-source-ref="dataSource"
-                               users-by-username-query="SELECT login, senha, 'true' as enable FROM usuario WHERE login=?"
-                               authorities-by-username-query="SELECT u.login, per.role FROM usuario u, perfil per WHERE u.codigo_perfil = per.codigo AND u.login = ?"/>
+                               users-by-username-query="SELECT login, senha, 'true' as enable FROM usuario WHERE login=?"                               
+                               authorities-by-username-query="SELECT  u.login, p.role FROM usuario u, perfil p, permissoes per WHERE u.codigo = per.codigo_usuario AND p.codigo = per.codigo_perfil AND u.login = ?"/>
         </authentication-provider>
     </authentication-manager>
     
     <b:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
-        <b:property name="url" value="jdbc:postgresql://localhost:5432/socialClub"/>
+        <b:property name="url" value="jdbc:postgresql://localhost:5432/social_club"/>
         <b:property name="driverClassName" value="org.postgresql.Driver"/>
         <b:property name="username" value="postgres"/>
         <b:property name="password" value="admin"/>

@@ -1,16 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.open.socialclub.modelo;
 
-/**
- *
- * @author Felipe Silva
- */
 public class CPF {
-    
-    String documento;
+
+    private String documento;
+
+    public CPF() {
+    }
+
+    public CPF(String documento) {
+        this.documento = documento;
+    }
 
     public String getDocumento() {
         return documento;
@@ -19,5 +18,4 @@ public class CPF {
     public void setDocumento(String documento) {
         this.documento = documento;
     }
-    
 }

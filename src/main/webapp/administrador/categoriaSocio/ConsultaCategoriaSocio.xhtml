@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:decorate template="/template/TemaPadrao.xhtml">
+        <ui:define name="title">
+            Cadastro
+        </ui:define>
+        <ui:define name="javascripts">
+
+        </ui:define>
+        <ui:define name="stylesheets">
+
+        </ui:define>
+        <ui:define name="body">
+            <h:form id="formConsultarCategoriaSocio">
+                <p:button value="Nova Categoria Socio" href="#" styleClass="btn btn-primary"/>
+                <br/>
+                <br/>
+                <p:messages id="mensagens" showDetail="true" autoUpdate="true" closable="true" globalOnly="true"/>
+                <p:dataTable id="tabelaConsultarCategoriaSocio" var="cs" value="#{categoriaSocioMB.todasCategoriasSocio}"
+                             styleClass="table table-bordered table-striped table-hover">
+
+                    <p:column headerText="Código" width="50">  
+                        <h:outputText value="#{cs.codigo}" />  
+                    </p:column>
+
+                    <p:column headerText="Descrição">  
+                        <h:outputText value="#{cs.descricao}" />  
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:decorate>
+</html>
+

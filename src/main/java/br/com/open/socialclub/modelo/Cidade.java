@@ -1,26 +1,30 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.open.socialclub.modelo;
 
-/**
- *
- * @author Felipe Silva
- */
 public class Cidade {
-    
-    long codigo;
-    String nome;
-    String cep;
-    
-    Estado estado;
 
-    public long getCodigo() {
+    private int codigo;
+    private String nome;
+    private String cep;
+    private int codigoIBGE;
+    private Estado estado;
+
+    public Cidade() {
+        estado = new Estado();
+    }
+    
+    public Cidade(int codigo, String nome, String cep, int codigoIBGE, Estado estado) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.cep = cep;
+        this.codigoIBGE = codigoIBGE;
+        this.estado = estado;
+    }
+
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(long codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
@@ -40,6 +44,14 @@ public class Cidade {
         this.cep = cep;
     }
 
+    public int getCodigoIBGE() {
+        return codigoIBGE;
+    }
+
+    public void setCodigoIBGE(int codigoIBGE) {
+        this.codigoIBGE = codigoIBGE;
+    }
+
     public Estado getEstado() {
         return estado;
     }
@@ -47,5 +59,4 @@ public class Cidade {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
-    
 }

@@ -13,20 +13,21 @@
         <script src="#{request.contextPath}/template/bootstrap/js/bootstrap.js"/>
 
         <link href="#{request.contextPath}/template/css/estilo-padrao.css" rel="stylesheet"/>
-        
+
         <ui:insert name="stylesheets">
 
         </ui:insert>
 
-        <title>Socio Club</title>
+        <title>#{mens.NOME_APLICACAO}</title>
     </h:head>
     <h:body>
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container-fluid">
-                    <a class="brand" href="#">
-                        Socio Club
+                    <a class="brand" href="#{request.contextPath}/usuario/PaginaInicial.xhtml">
+                        #{mens.NOME_APLICACAO}
                     </a>
+
                     <div class="dropdown pull-right">
                         <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-white icon-user"/>
@@ -35,7 +36,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a onclick="document.location = '#{request.contextPath}/j_spring_security_logout'">
-                                    <i class="icon-off"/>SAIR   
+                                    <i class="icon-off"/>#{mens.LABEL_SAIR}
                                 </a>
                             </li>
                         </ul>
@@ -48,9 +49,40 @@
                 <div class="span2">
                     <div class="sidebar-nav">
                         <ul class="nav nav-pills nav-stacked">
+                            <li class="nav-menu active">
+                                <a href="#">#{mens.LABEL_PAGINA_INICIAL}</a>
+                            </li>                           
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-toggle" data-toggle="dropdown-menu" href="#">
+                                    #{mens.LABEL_SOCIO}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-submenumenu">
+                                        <a href="#" >
+                                            Consultar Sócio
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-toggle" data-toggle="dropdown-menu" href="#">
+                                    #{mens.LABEL_SISTEMA}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-header">Gênericas</li>
+                                    <li><a href="#">#{mens.LABEL_CATEGORIA_SOCIO}</a></li>
+                                    <li><a href="#">#{mens.LABEL_TIPO_SOCIO}</a></li>
+                                    <li class="divider"></li>
+                                    <li class="nav-header">#{mens.LABEL_CONFIGURACAO}</li>
+                                    <li><a href="#">#{mens.LABEL_PERFIL}</a></li>
+                                    <li><a href="#">#{mens.LABEL_PERMISSOES}</a></li>
+                                    <li><a href="#">#{mens.LABEL_USUARIO}</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </div>
+
                 <div class="span10">
                     <div class="page-header">
                         <h1>

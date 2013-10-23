@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.1"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+
+    <application>       
+        <locale-config>
+            <default-locale>pt_BR</default-locale>
+            <supported-locale>pt_BR</supported-locale>         
+        </locale-config>
+         
+        <message-bundle>br.com.open.socialclub.aplicacao.Mensagens</message-bundle>
+
+        <resource-bundle>
+            <base-name>br.com.open.socialclub.aplicacao.Mensagens</base-name>
+            <var>mens</var>
+        </resource-bundle>
+    </application>
+</faces-config>

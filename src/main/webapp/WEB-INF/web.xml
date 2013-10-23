@@ -19,9 +19,28 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>/usuario/acesso/PaginaInicial.xhtml</welcome-file>
+        <welcome-file>/acesso/Login.xhtml</welcome-file>
     </welcome-file-list>
     
+    <context-param>  
+        <param-name>primefaces.THEME</param-name>  
+        <param-value>bootstrap</param-value>  
+    </context-param> 
     
+    <!--CONFIGURACAO SPRING SECURITY-->
+    
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!--FIM DA CONFIGURACAO SPRING SECURITY-->
     
 </web-app>

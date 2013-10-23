@@ -1,6 +1,6 @@
 package br.com.open.socialclub.dao;
 
-import br.com.open.socialclub.modelo.Cidade;
+import br.com.open.socialclub.modelo.TipoTelefone;
 import br.com.open.socialclub.persistencia.AbstractDao;
 import br.com.open.socialclub.persistencia.DaoException;
 import java.sql.Connection;
@@ -12,14 +12,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class CidadeDAO extends AbstractDao<Cidade> {
 
-    public CidadeDAO(boolean owner) {
+public class TipoTelefoneDAO extends AbstractDao<TipoTelefone>{
+
+    public TipoTelefoneDAO(boolean owner) {
         super(owner);
     }
 
     @Override
-    public long save(Cidade obj) throws DaoException {
+    public long save(TipoTelefone obj) throws DaoException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -28,13 +29,10 @@ public class CidadeDAO extends AbstractDao<Cidade> {
 
             this.beginTransaction();
 
-            String sql = "INSERT INTO cidade (nome, cep, codigo_ibge, sigla_estado) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO tipo_telefone (descricao) VALUES (?)";
 
             stm = con.prepareStatement(sql);
-            stm.setString(1, obj.getNome());
-            stm.setString(2, obj.getCep());
-            stm.setInt(3, obj.getCodigoIBGE());
-            stm.setString(4, obj.getEstado().getSigla());
+            stm.setString(1, obj.getDescricao());
 
             stm.execute();
 
@@ -55,12 +53,12 @@ public class CidadeDAO extends AbstractDao<Cidade> {
     }
 
     @Override
-    public void saveAll(List<Cidade> objs) throws DaoException {
+    public void saveAll(List<TipoTelefone> objs) throws DaoException {
         //
     }
 
     @Override
-    public void update(Cidade obj) throws DaoException {
+    public void update(TipoTelefone obj) throws DaoException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -69,14 +67,11 @@ public class CidadeDAO extends AbstractDao<Cidade> {
 
             this.beginTransaction();
 
-            String sql = "UPDATE cidade SET nome = ?, cep = ?, codigo_ibge = ?, sigla_estado = ? WHERE codigo = ?";
+            String sql = "UPDATE tipo_telefone SET descricao = ? WHERE codigo = ?";
 
             stm = con.prepareStatement(sql);
-            stm.setString(1, obj.getNome());
-            stm.setString(2, obj.getCep());
-            stm.setInt(3, obj.getCodigoIBGE());
-            stm.setString(4, obj.getEstado().getSigla());
-            stm.setLong(5, obj.getCodigo());
+            stm.setString(1, obj.getDescricao());
+            stm.setLong(2, obj.getCodigo());
 
             stm.executeUpdate();
 
@@ -96,7 +91,7 @@ public class CidadeDAO extends AbstractDao<Cidade> {
     }
 
     @Override
-    public void delete(Cidade obj) throws DaoException {
+    public void delete(TipoTelefone obj) throws DaoException {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -105,7 +100,7 @@ public class CidadeDAO extends AbstractDao<Cidade> {
             con = getConnection();
             this.beginTransaction();
 
-            String sql = "DELETE FROM cidade WHERE codigo = ?";
+            String sql = "DELETE FROM tipo_telefone WHERE codigo = ?";
 
             stm = con.prepareStatement(sql);
             stm.setLong(1, obj.getCodigo());
@@ -133,9 +128,9 @@ public class CidadeDAO extends AbstractDao<Cidade> {
     }
 
     @Override
-    public List<Cidade> findAll() throws DaoException {
-        List<Cidade> lista = new ArrayList<Cidade>();
-        Cidade cidade;
+    public List<TipoTelefone> findAll() throws DaoException {
+        List<TipoTelefone> lista = new ArrayList<TipoTelefone>();
+        TipoTelefone tipo;
 
         Connection con = null;
         Statement stm = null;
@@ -146,19 +141,16 @@ public class CidadeDAO extends AbstractDao<Cidade> {
             con = getConnection();
 
             stm = con.createStatement();
-            String sql = "SELECT * FROM cidade ORDER BY nome";
+            String sql = "SELECT * FROM tipo_telefone ORDER BY descricao";
 
             rs = stm.executeQuery(sql);
 
             while (rs.next()) {
-                cidade = new Cidade();
-                cidade.setCodigo(rs.getInt("codigo"));
-                cidade.setNome(rs.getString("nome"));
-                cidade.setCep(rs.getString("cep"));
-                cidade.setCodigoIBGE(rs.getInt("codigo_ibge"));
-                cidade.getEstado().setSigla(rs.getString("sigla_estado"));                
+                tipo = new TipoTelefone();
+                tipo.setCodigo(rs.getInt("codigo"));
+                tipo.setDescricao(rs.getString("descricao"));
 
-                lista.add(cidade);
+                lista.add(tipo);
             }
 
         } catch (SQLException e) {
@@ -171,9 +163,9 @@ public class CidadeDAO extends AbstractDao<Cidade> {
     }
 
     @Override
-    public List<Cidade> findByParams(HashMap<String, Object> params) throws DaoException {
-        List<Cidade> lista = new ArrayList<Cidade>();
-        Cidade cidade;
+    public List<TipoTelefone> findByParams(HashMap<String, Object> params) throws DaoException {
+        List<TipoTelefone> lista = new ArrayList<TipoTelefone>();
+        TipoTelefone tipo;
 
         Connection con = null;
         PreparedStatement stm = null;
@@ -183,21 +175,18 @@ public class CidadeDAO extends AbstractDao<Cidade> {
 
             con = getConnection();
 
-            String sql = "SELECT * FROM cidade";
+            String sql = "SELECT * FROM tipo_telefone";
 
             stm = this.getPreparedStatementByHashMap(con, sql, params);
 
             rs = stm.executeQuery();
 
             while (rs.next()) {
-                cidade = new Cidade();
-                cidade.setCodigo(rs.getInt("codigo"));
-                cidade.setNome(rs.getString("nome"));
-                cidade.setCep(rs.getString("cep"));
-                cidade.setCodigoIBGE(rs.getInt("codigo_ibge"));
-                cidade.getEstado().setSigla(rs.getString("sigla_estado"));
+                tipo = new TipoTelefone();
+                tipo.setCodigo(rs.getInt("codigo"));
+                tipo.setDescricao(rs.getString("descricao"));
 
-                lista.add(cidade);
+                lista.add(tipo);
             }
 
         } catch (SQLException e) {
@@ -210,15 +199,15 @@ public class CidadeDAO extends AbstractDao<Cidade> {
     }
 
     @Override
-    public Cidade findById(long id) throws DaoException {
-        Cidade cidade = null;
+    public TipoTelefone findById(long id) throws DaoException {
+        TipoTelefone tipo = null;
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
 
         try {
 
-            String sql = "SELECT * FROM cidade WHERE codigo = ?";
+            String sql = "SELECT * FROM tipo_telefone WHERE codigo = ?";
 
             con = getConnection();
 
@@ -230,12 +219,9 @@ public class CidadeDAO extends AbstractDao<Cidade> {
 
             if (rs.next()) {
 
-                cidade = new Cidade();
-                cidade.setCodigo(rs.getInt("codigo"));
-                cidade.setNome(rs.getString("nome"));
-                cidade.setCep(rs.getString("cep"));
-                cidade.setCodigoIBGE(rs.getInt("codigo_ibge"));
-                cidade.getEstado().setSigla(rs.getString("sigla_estado"));
+                tipo = new TipoTelefone();
+                tipo.setCodigo(rs.getInt("codigo"));
+                tipo.setDescricao(rs.getString("descricao"));
             }
 
         } catch (SQLException e) {
@@ -245,7 +231,7 @@ public class CidadeDAO extends AbstractDao<Cidade> {
             this.free(con, null, stm, rs);
         }
 
-        return cidade;
+        return tipo;
     }
 
     @Override
@@ -264,7 +250,7 @@ public class CidadeDAO extends AbstractDao<Cidade> {
             con = getConnection();
 
             stm = con.createStatement();
-            String sql = "SELECT * FROM cidade";
+            String sql = "SELECT * FROM tipo_telefone";
 
             rs = stm.executeQuery(sql);
 
@@ -283,4 +269,5 @@ public class CidadeDAO extends AbstractDao<Cidade> {
 
         return 0;
     }
+	
 }

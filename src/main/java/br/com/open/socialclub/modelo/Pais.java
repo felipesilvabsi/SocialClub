@@ -1,33 +1,26 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.open.socialclub.modelo;
 
-/**
- *
- * @author Felipe Silva
- */
 public class Pais {
-    
-    long pais;
-    String nome;
-    String sigla;
 
-    public long getPais() {
-        return pais;
+    private int codigo;
+    private String sigla;
+    private String nome;
+
+    public Pais() {
     }
 
-    public void setPais(long pais) {
-        this.pais = pais;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
+    public Pais(int codigo, String sigla, String nome) {
+        this.codigo = codigo;
+        this.sigla = sigla;
         this.nome = nome;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public String getSigla() {
@@ -37,5 +30,12 @@ public class Pais {
     public void setSigla(String sigla) {
         this.sigla = sigla;
     }
-    
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }

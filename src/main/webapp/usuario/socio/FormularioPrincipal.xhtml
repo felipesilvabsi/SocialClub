@@ -1,76 +1,383 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <div class="row-fluid">
-        <div class="span2">
-            <h:outputLabel value="Selecione uma opção"/>
-        </div>
-        <div class="span1 offset9">
-            <label class="checkbox">
-                <input id="chkInativo" type="checkbox" name="inativo" value="Inativo">  Inativo</input>
-            </label>
-        </div>
-    </div>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
-    <div class="row-fluid">
-        <div class="span2">
-            <label class="checkbox">
-                <input id="pessoaFisica" type="checkbox" name="pessoaFisical" value="Pessoa Fisica">  Pessoa Fisica</input>
-            </label>
-        </div>
-        <div class="span2">
-            <label class="checkbox">
-                <input id="pessoaJuridica" type="checkbox" name="pessoaJuridica" value="Pessoa Juridica">  Pessoa Juridica</input>
-            </label>
-        </div>
-    </div>
+    <ul class="tabbable localizacao-abas">
+        <ul class="nav nav-tabs nav-pills">
+            <li class="active">
+                <a href="#aba1" data-toggle="tab">
+                    Dados
+                </a>
+            </li>
+            <li>
+                <a href="#aba2" data-toggle="tab">
+                    Adicionais
+                </a>
+            </li>
+        </ul>
 
-    <div class="control-group">
-        <h:outputLabel for="campoNome" value="Nome: *" styleClass="control-label"/>
-        <div class="controls">
-            <h:inputText id="campoNome" value="" />
-        </div>
-    </div>
+        <div class="tab-content">
+            <div class="tab-pane active" id="aba1">
 
-    <div id="painelPessoaFisica" style="display: none;">
-        <div class="control-group">
-            <h:outputLabel for="campoCPF" value="CPF: *" styleClass="control-label"/>
-            <div class="controls">
-                <h:inputText id="campoCPF" value="" class="mask-cpf"/>
+                <div class="row-fluid">
+                    <div class="span3">
+                        <h5>Selecione uma opção</h5>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label class="radio">
+                            <input id="pessoaFisica" type="radio" name="pessoaFisical" value="Pessoa Fisica">  Pessoa Fisica</input>
+                        </label>
+                    </div>
+                    <div class="span2">
+                        <label class="radio">
+                            <input id="pessoaJuridica" type="radio" name="pessoaJuridica" value="Pessoa Juridica">  Pessoa Juridica</input>
+                        </label>
+                    </div>
+                    <div class="span1 offset5">
+                        <label class="checkbox">
+                            <input id="chkInativo" type="checkbox" name="inativo" value="Inativo">  Inativo</input>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span10">
+                        <div class="control-group">
+                            <h:outputLabel for="campoNome" value="Nome: *" styleClass="control-label label-required"/>
+                            <div class="controls">
+                                <h:inputText id="campoNome" value="" styleClass="input-block-level" required="true">
+                                    <p:ajax event="blur" update="campoNome, msgCampoNome"/>
+                                </h:inputText>
+                            </div>
+                            <h:message id="msgCampoNome" for="campoNome" styleClass="help-inline"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span10">
+                        <div class="control-group">
+                            <h:outputLabel for="campoEmail" value="Email: " styleClass="control-label"/>
+                            <div class="controls">
+                                <h:inputText id="campoEmail" value="" styleClass="input-block-level"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span5">
+                        <h:outputLabel for="selectCategoriaSocio" value="Categoria Socio: *" styleClass="control-label label-required"/>
+                        <div class="control-group">
+                            <div class="controls">
+                                <h:selectOneMenu id="selectCategoriaSocio" value="" styleClass="input-block-level" required="true">   
+                                    <p:ajax event="blur" update="selectCategoriaSocio"/>
+                                    <f:selectItem itemLabel="#{mens.LABEL_SELECIONE}" itemValue="" />  
+                                    <f:selectItems value="#{categoriaSocioMB.todasCategoriasSocio}" var="cs" itemLabel="#{cs.descricao}" itemValue="#{cs.codigo}" /> 
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="span5">
+                        <h:outputLabel for="selectTipoSocio" value="Tipo Socio: *" styleClass="control-label label-required"/>
+                        <div class="control-group">
+                            <div class="controls">
+                                <h:selectOneMenu id="selectTipoSocio" value="" styleClass="input-block-level" required="true">   
+                                    <p:ajax event="blur" update="selectTipoSocio"/>
+                                    <f:selectItem itemLabel="#{mens.LABEL_SELECIONE}" itemValue="" />  
+                                    <f:selectItems value="#{tipoSocioMB.todosTiposSocio}" var="ts" itemLabel="#{ts.descricao}" itemValue="#{ts.codigo}" /> 
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span5">
+                        <div class="control-group">
+                            <h:outputLabel for="campoEndereco" value="Endereco: *" styleClass="control-label label-required"/>
+                            <div class="controls">
+                                <h:inputText id="campoEndereco" value="" styleClass="input-block-level"/>
+                            </div>
+                        </div>        
+                    </div>
+
+                    <div class="span4">
+                        <div class="control-group">
+                            <h:outputLabel for="campoComplemento" value="Complemento: *" styleClass="control-label label-required"/>
+                            <div class="controls">
+                                <h:inputText id="campoComplemento" value="" styleClass="input-block-level"/>
+                            </div>
+                        </div>        
+                    </div>
+
+                    <div class="span1">
+                        <div class="control-group">
+                            <h:outputLabel for="campoNumero" value="Numero:*" styleClass="control-label label-required"/>
+                            <div class="controls">
+                                <h:inputText id="campoNumero" value="" styleClass="input-block-level"/>
+                            </div>
+                        </div>        
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+
+                    <div class="span3">
+                        <div class="control-group">
+                            <h:outputLabel for="campoBairro" value="Bairro: *" styleClass="control-label"/>
+                            <div class="controls">
+                                <h:inputText id="campoBairro" value="" styleClass="input-block-level"/>
+                            </div>
+                        </div>        
+                    </div>
+
+                    <div class="span3">
+                        <h:outputLabel for="selectCidade" value="Cidade: *" styleClass="control-labellabel-required"/>
+                        <div class="control-group">
+                            <h:selectOneMenu id="selectCidade" value="" styleClass="input-block-level" required="true">   
+                                <f:selectItem itemLabel="#{mens.LABEL_SELECIONE}" itemValue="" />  
+                                <f:selectItems value="#{cidadeMB.todasCidades}" var="c" itemLabel="#{c.nome}" itemValue="#{c.codigo}" />
+                            </h:selectOneMenu>
+                        </div>        
+                    </div>
+
+                    <div class="span3">
+                        <div class="control-group">
+                            <h:outputLabel for="campoCEP" value="CEP: *" styleClass="control-label label-required"/>
+                            <div class="controls">
+                                <h:inputText id="campoCEP" value="" styleClass="input-block-level"/>
+                            </div>
+                        </div>        
+                    </div>
+
+                    <div class="span1">
+                        <div class="control-group">
+                            <h:outputLabel for="campoUF" value="UF: " styleClass="control-label label-required"/>
+                            <div class="controls">
+                                <h:inputText id="campoUF" value="" styleClass="input-block-level" disabled="true"/>
+                            </div>
+                        </div>        
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span10">
+                        <div class="control-group">
+                            <h:outputLabel for="textAreaPontoReferencia" value="Ponto de Referência: " styleClass="control-label"/>
+                            <div class="controls">
+                                <p:inputTextarea id="textAreaPontoReferencia" rows="6" value="" styleClass="input-block-level" required="true">
+                                    <p:ajax event="blur" update="textAreaPontoReferencia"/>
+                                </p:inputTextarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="painelPessoaFisica" style="display: none;">
+                    <div class="row-fluid">
+                        <div class="span3">
+                            <div class="control-group">
+                                <h:outputLabel for="campoCPF" value="CPF: *" styleClass="control-label label-required"/>
+                                <div class="controls">
+                                    <h:inputText id="campoCPF" value="" styleClass="mask-cpf input-block-level"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="span3">
+                            <div class="control-group">
+                                <h:outputLabel for="campoRG" value="RG: *" styleClass="control-label label-required"/>
+                                <div class="controls">
+                                    <h:inputText id="campoRG" value="" styleClass="mask-cpf input-block-level"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="span3">
+                            <div class="control-group">
+                                <h:outputLabel for="campoDataNascimento" value="Data Nascimento: *" styleClass="control-label label-required"/>
+                                <div class="controls">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="span1">
+                            <h:outputLabel for="selectSexo" value="Sexo: *" styleClass="control-label label-required"/>
+                            <div class="control-group">
+                                <h:selectOneMenu id="selectSexo" value="" styleClass="input-block-level" required="true">   
+                                    <p:ajax event="blur" update="selectSexo"/>
+                                    <f:selectItem itemLabel="" itemValue="" />  
+                                    <f:selectItem itemLabel="M" itemValue="M" />  
+                                    <f:selectItem itemLabel="F" itemValue="F" />  
+                                </h:selectOneMenu>
+
+                            </div>        
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span10">
+                            <div class="control-group">
+                                <h:outputLabel for="campoNomePai" value="Nome do Pai: *" styleClass="control-label label-required"/>
+                                <div class="controls">
+                                    <h:inputText id="campoNomePai" value="" styleClass="input-block-level"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span10">
+                            <div class="control-group">
+                                <h:outputLabel for="campoNomeMae" value="Nome do Mae: *" styleClass="control-label label-required"/>
+                                <div class="controls">
+                                    <h:inputText id="campoNomeMae" value="" styleClass="input-block-level"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="painelPessoaJuridica" style="display: none;">
+
+                    <div class="row-fluid">
+                        <div class="span10">
+                            <div class="control-group">
+                                <h:outputLabel for="campoNomeFantasia" value="Nome Fantasia: *" styleClass="control-label label-required"/>
+                                <div class="controls">
+                                    <h:inputText id="campoNomeFantasia" value="" styleClass="input-block-level"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span3">
+                            <div class="control-group">
+                                <h:outputLabel for="campoCNPJ" value="CNPJ: *" styleClass="control-label label-required"/>
+                                <div class="controls">
+                                    <h:inputText id="campoCNPJ" value="" styleClass="mask-cnpj input-block-level"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="span7">
+                            <div class="control-group">
+                                <h:outputLabel for="selectCRT" value="CRT: *" styleClass="control-label label-required"/>
+                                <div class="controls">
+                                    <h:selectOneMenu id="selectCRT" value="" styleClass="input-block-level" required="true">   
+                                        <p:ajax event="blur" update="selectCRT"/>
+                                        <f:selectItem itemLabel="#{mens.LABEL_SELECIONE}" itemValue="" />  
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span5">        
+                            <div class="control-group">
+                                <h:outputLabel for="campoInscEstadual" value="Inscrição Estadual: *" styleClass="control-label label-required"/>
+                                <div class="controls">
+                                    <h:inputText id="campoInscEstadual" value="" styleClass="input-block-level" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="span5">        
+                            <div class="control-group">
+                                <h:outputLabel for="campoInscMunicipal" value="Inscrição Municipal: *" styleClass="control-label label-required"/>
+                                <div class="controls">
+                                    <h:inputText id="campoInscMunicipal" value="" styleClass="input-block-level"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
             </div>
-        </div>
-    </div>
 
-    <div id="painelPessoaJuridica" style="display: none;">
-        <div class="control-group">
-            <h:outputLabel for="campoCNPJ" value="CNPJ: *" styleClass="control-label"/>
-            <div class="controls">
-                <h:inputText id="campoCNPJ" value="" />
-            </div>
-        </div>
+            <div class="tab-pane" id="aba2">
+                <h:form id="formTelefone">
+                    <div class="row-fluid">
+                        <div class="span3">        
+                            <div class="control-group">
+                                <h:outputLabel for="campoNumeroTelefone" value="Numero: *" styleClass="control-label label-required"/>
+                                <div class="controls">
+                                    <p:inputText id="campoNumeroTelefone" value="#{socioMB.telefone.numero}" styleClass="input-block-level mask-numero-telefone" required="true"/>
+                                </div>
+                                <h:message id="msgCampoNumeroTelefone" for="campoNumeroTelefone" styleClass="help-inline"/>
+                            </div>
+                        </div>
 
-        <div class="control-group">
-            <h:outputLabel for="campoCRT" value="CRT: *" styleClass="control-label"/>
-            <div class="controls">
-                <h:inputText id="campoCRT" value="" />
-            </div>
-        </div>
+                        <div class="span3">        
+                            <div class="control-group">
+                                <h:outputLabel for="campoContato" value="Contato: *" styleClass="control-label label-required"/>
+                                <div class="controls">
+                                    <p:inputText id="campoContato" value="#{socioMB.telefone.contato}" styleClass="input-block-level" required="true"/>
+                                </div>
+                                <h:message id="msgCampoContato" for="campoContato" styleClass="help-inline"/>
+                            </div>
+                        </div>
 
-        <div class="control-group">
-            <h:outputLabel for="campoNomeFantasia" value="Nome Fantasia: *" styleClass="control-label"/>
-            <div class="controls">
-                <h:inputText id="campoNomeFantasia" value="" />
-            </div>
-        </div>
+                        <div class="span3">
+                            <h:outputLabel for="selectTipoTelefone" value="Tipo Telefone: *" styleClass="control-label label-required"/>
+                            <div class="control-group">
+                                <h:selectOneMenu id="selectTipoTelefone" value="#{socioMB.telefone.tipo}" styleClass="input-block-level" required="true">   
+                                    <p:ajax event="blur" update="selectTipoTelefone"/>
+                                    <f:selectItem itemLabel="#{mens.LABEL_SELECIONE}" itemValue="" />  
+                                    <f:selectItems value="#{tipoTelefoneMB.todosTiposTelefone}" var="tt" itemLabel="#{tt.descricao}" itemValue="#{tt}" /> 
+                                </h:selectOneMenu>
 
-        <div class="control-group">
-            <h:outputLabel for="campoInscEstadual" value="Inscrição Estadual: *" styleClass="control-label"/>
-            <div class="controls">
-                <h:inputText id="campoInscEstadual" value="" />
-            </div>
+                            </div>        
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span9">
+                            <p:dataTable id="tabelaTelefone" var="t" value="#{socioMB.telefones}"
+                                         styleClass="table table-bordered table-striped table-hover ">
+
+                                <p:column headerText="Numero">  
+                                    <h:outputText value="#{t.numero}" />  
+                                </p:column>
+
+                                <p:column headerText="Contato">  
+                                    <h:outputText value="#{t.contato}" />  
+                                </p:column>
+
+                                <p:column headerText="Tipo">  
+                                    <h:outputText value="#{t.tipo.descricao}" />  
+                                </p:column>
+
+                                <p:column headerText="Ações">  
+                                    <p:commandLink id="excluir" title="Excluir">
+                                        <i class="icon-remove"/>
+                                        <f:setPropertyActionListener value="#{t}" target="#{socioMB.telefone}"/>
+                                    </p:commandLink>
+
+                                </p:column>
+                            </p:dataTable>
+                        </div>
+                        <div class="span2">
+                            <div class="row-fluid">
+                                <p:commandLink id="botaoAdicionar" value="Adicionar" styleClass="btn btn-success"
+                                               action="#{socioMB.adicionarTelefone()}" process="@this, campoNumeroTelefone, campoContato"
+                                               update="tabelaTelefone"/>                        
+                            </div>
+                        </div>
+
+                    </div>
+                </h:form>
+            </div>                       
         </div>
-    </div>
+    </ul>
 
 </html>
-
